@@ -36,7 +36,7 @@ namespace ConsultarCEP
                 {
                     Endereco end = VIACepServico.BuscaEnderecoViaCEP(cep);
                     if (end != null)
-                        RESULTADO.Text = string.Format("Endereço: {2} de {3} {0},{1} ", end.localidade, end.uf, end.logradouro, end.bairro);
+                        RESULTADO.Text = string.Format("Endereço: {2} de {3} - {0},{1} ", end.localidade, end.uf, end.logradouro, end.bairro);
                     else
                     {
                         DisplayAlert("Erro", "O endereço não foi encontrado para o cep " + cep, "OK");
