@@ -14,7 +14,16 @@
         
         <Label Text="" 
            HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" x:Name="RESULTADO"/>
+           VerticalOptions="CenterAndExpand" x:Name="RESULTADO" Padding="0,0,0,50"/>
+
+        <StackLayout>
+            <Label Text="Version Number:" TextColor="White" FontAttributes="Bold" FontSize="15" />
+            <Label x:Name="lblVersionNumber" TextColor="White" FontAttributes="Bold" FontSize="15" />
+        </StackLayout>
+        <StackLayout>
+            <Label Text="Build Number:" FontSize="15" TextColor="White" FontAttributes="Bold" />
+            <Label x:Name="lblBuildNumber" TextColor="White" FontAttributes="Bold" FontSize="125" />
+        </StackLayout>
     </StackLayout>
 
 </ContentPage>
