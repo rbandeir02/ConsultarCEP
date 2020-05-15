@@ -9,20 +9,24 @@
     <StackLayout BackgroundColor="#FFBF00" Padding="30" Spacing="30">
         <!-- Place new controls here -->
         <Image Source="logoCep.png" x:Name="LOGO"/>
-        <Entry Placeholder="Digite o cep" PlaceholderColor="#FFBF00" BackgroundColor="#FFFFFF" x:Name="CEP"/>
+        <Entry Placeholder="Digite o cep" PlaceholderColor="#FFBF00" BackgroundColor="#FFFFFF" x:Name="CEP" Keyboard="Numeric" MaxLength="8"/>
         <Button Text="Buscar Cep" TextColor="#FFFFFF" BackgroundColor="#00416B" x:Name="BOTAO"/>
         
         <Label Text="" 
            HorizontalOptions="Center"
            VerticalOptions="CenterAndExpand" x:Name="RESULTADO" Padding="0,0,0,50"/>
-
+        <StackLayout Padding="5" Spacing="5">
         <StackLayout>
-            <Label Text="Version Number:" TextColor="White" FontAttributes="Bold" FontSize="15" />
-            <Label x:Name="lblVersionNumber" TextColor="White" FontAttributes="Bold" FontSize="15" />
+            <Label Text="Version Number" TextColor="White" FontAttributes="Bold" FontSize="12" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"/>
+            <Label x:Name="lblVersionNumber" TextColor="White" FontAttributes="Bold" FontSize="12" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"/>
         </StackLayout>
         <StackLayout>
-            <Label Text="Build Number:" FontSize="15" TextColor="White" FontAttributes="Bold" />
-            <Label x:Name="lblBuildNumber" TextColor="White" FontAttributes="Bold" FontSize="125" />
+            <Label Text="Build Number" FontSize="12" TextColor="White" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"  />
+            <Label x:Name="lblBuildNumber" TextColor="White" FontAttributes="Bold" FontSize="12" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"/>
+        </StackLayout>
+        <StackLayout>
+            <Label Text="=== Desenvolvido por Raphael Bandeira ===" FontSize="12" TextColor="White" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"  />
+        </StackLayout>
         </StackLayout>
     </StackLayout>
 

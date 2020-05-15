@@ -9,6 +9,7 @@ using ConsultarCEP.Servico.Modelo;
 using ConsultarCEP.Servico;
 using System.Text.RegularExpressions;
 using VersionAndBuildNumber.DependencyServices;
+using Xamarin.Essentials;
 
 namespace ConsultarCEP
 {
@@ -23,8 +24,11 @@ namespace ConsultarCEP
 
             BOTAO.Clicked += BuscarCEP;
 
-            lblVersionNumber.Text = DependencyService.Get<IAppVersionAndBuild>().GetVersionNumber();
-            lblBuildNumber.Text = DependencyService.Get<IAppVersionAndBuild>().GetBuildNumber();
+            //lblVersionNumber.Text = DependencyService.Get<IAppVersionAndBuild>().GetVersionNumber();
+            //lblVersionNumber.Text = Application.Context.ApplicationContext.PackageManager.GetPackageInfo(Application.Context.ApplicationContext.PackageName, 0).VersionName;
+            lblVersionNumber.Text = AppInfo.VersionString;
+            //lblBuildNumber.Text = DependencyService.Get<IAppVersionAndBuild>().GetBuildNumber();
+            lblBuildNumber.Text = AppInfo.BuildString;
 
         }
 
