@@ -9,7 +9,7 @@
     <StackLayout BackgroundColor="#FFBF00" Padding="30" Spacing="30">
         <!-- Place new controls here -->
         <Image Source="logoCep.png" x:Name="LOGO"/>
-        <Entry Placeholder="Digite o cep" PlaceholderColor="#FFBF00" BackgroundColor="#FFFFFF" x:Name="CEP" Keyboard="Numeric" MaxLength="8"/>
+        <Entry Placeholder="Digite o cep" PlaceholderColor="#FFBF00" BackgroundColor="#FFFFFF" x:Name="CEP" Keyboard="Numeric" MaxLength="8" Completed="BuscarCEP" TextChanged="VerificarDigito"/>
         <Button Text="Buscar Cep" TextColor="#FFFFFF" BackgroundColor="#00416B" x:Name="BOTAO"/>
         
         <Label Text="" 

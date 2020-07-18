@@ -39,7 +39,8 @@ namespace ConsultarCEP
             //TODO - Validações
             string cep = CEP.Text.Trim();
 
-            if (isValidCEP(cep)) {
+            if (isValidCEP(cep))
+            {
                 try
                 {
                     Endereco end = VIACepServico.BuscaEnderecoViaCEP(cep);
@@ -57,7 +58,8 @@ namespace ConsultarCEP
                     RESULTADO.Text = "";
                 }
             }
-            else {
+            else
+            {
                 DisplayAlert("Erro", "CEP Inválido.", "OK");
             }
         }
@@ -75,5 +77,12 @@ namespace ConsultarCEP
                 return true;
         }
 
+        private void VerificarDigito(object sender, EventArgs args)
+        {
+            if (CEP.Text.Length == 8)
+            {
+                BuscarCEP(sender, args);
+            }
+        }
     }
 }
