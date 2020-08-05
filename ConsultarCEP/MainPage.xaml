@@ -9,13 +9,15 @@
     <StackLayout BackgroundColor="#FFBF00" Padding="30" Spacing="30">
         <!-- Place new controls here -->
         <Image Source="logoCep.png" x:Name="LOGO"/>
-        <Entry Placeholder="Digite o cep" PlaceholderColor="#FFBF00" BackgroundColor="#FFFFFF" x:Name="CEP" Keyboard="Numeric" MaxLength="8" Completed="BuscarCEP" TextChanged="VerificarDigito"/>
+        <Entry Placeholder="Digite o cep" PlaceholderColor="#FFBF00" BackgroundColor="#FFFFFF" x:Name="CEP" Keyboard="Numeric" MaxLength="8" TextChanged="VerificarDigito"/>
         <Button Text="Buscar Cep" TextColor="#FFFFFF" BackgroundColor="#00416B" x:Name="BOTAO"/>
         
         <Label Text="" 
            HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" x:Name="RESULTADO" Padding="0,0,0,50"/>
-        <StackLayout Padding="5" Spacing="5">
+           VerticalOptions="CenterAndExpand" x:Name="RESULTADO" Padding="0,0,0,20"/>
+        <Button Text="Copiar para Área de Transferência" BackgroundColor="#00416B" TextColor="White" HorizontalOptions="FillAndExpand" HeightRequest="45" 
+            x:Name="btnClipboard" />
+        <StackLayout Padding="3" Spacing="3">
         <StackLayout>
             <Label Text="Version Number" TextColor="White" FontAttributes="Bold" FontSize="12" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"/>
             <Label x:Name="lblVersionNumber" TextColor="White" FontAttributes="Bold" FontSize="12" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"/>

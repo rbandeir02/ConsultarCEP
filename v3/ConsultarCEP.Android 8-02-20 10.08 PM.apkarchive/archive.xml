@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Archive>
+  <Name>Consulta CEP</Name>
+  <PackageName>br.com.rob.consultarcep</PackageName>
+  <PackageVersionCode>3</PackageVersionCode>
+  <PackageVersionName>3.0</PackageVersionName>
+  <PackageFormat>apk</PackageFormat>
+  <CreationDate>637320137093793618</CreationDate>
+  <SolutionName>ConsultarCEP</SolutionName>
+  <SolutionPath>C:\Projetos\ConsultarCEP\ConsultarCEP.sln</SolutionPath>
+  <Status></Status>
+  <Configuration>
+    <DebugMode>false</DebugMode>
+  </Configuration>
+</Archive>

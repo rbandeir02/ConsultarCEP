@@ -10,6 +10,9 @@ using ConsultarCEP.Servico;
 using System.Text.RegularExpressions;
 using VersionAndBuildNumber.DependencyServices;
 using Xamarin.Essentials;
+using Android.Hardware;
+using Acr.UserDialogs;
+using ClipboardDemo.Interfaces;
 
 namespace ConsultarCEP
 {
@@ -18,49 +21,96 @@ namespace ConsultarCEP
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
+        string cep = "";
         public MainPage()
         {
             InitializeComponent();
 
-            BOTAO.Clicked += BuscarCEP;
+            this.BindingContext = this;
+            // Define a propriedade
+            this.IsBusy = false;
 
-            //lblVersionNumber.Text = DependencyService.Get<IAppVersionAndBuild>().GetVersionNumber();
-            //lblVersionNumber.Text = Application.Context.ApplicationContext.PackageManager.GetPackageInfo(Application.Context.ApplicationContext.PackageName, 0).VersionName;
-            lblVersionNumber.Text = AppInfo.VersionString;
+            // BOTAO.Clicked += BuscarCEP;
+
+            BOTAO.Clicked += async (sender, e) =>
+            {
+
+                  UserDialogs.Instance.ShowLoading("Carregando...");
+                  //await Task.Yield();
+                  await BuscarCEP();
+                  UserDialogs.Instance.HideLoading();
+
+               /* this.IsBusy = true;
+                await BuscarCEP();
+                this.IsBusy = false;*/
+
+
+            };
+
+            btnClipboard.Clicked += async (sender, e) =>
+            {
+                var clipboardService = DependencyService.Get<IClipboardService>();
+                clipboardService?.CopyToClipboard(RESULTADO.Text);
+                await DisplayAlert("Consultar Cep", "Endereço do Cep "+ cep + " copiado!", "Ok");
+
+
+            };
+
+                //lblVersionNumber.Text = DependencyService.Get<IAppVersionAndBuild>().GetVersionNumber();
+                //lblVersionNumber.Text = Application.Context.ApplicationContext.PackageManager.GetPackageInfo(Application.Context.ApplicationContext.PackageName, 0).VersionName;
+                lblVersionNumber.Text = AppInfo.VersionString;
             //lblBuildNumber.Text = DependencyService.Get<IAppVersionAndBuild>().GetBuildNumber();
             lblBuildNumber.Text = AppInfo.BuildString;
+            btnClipboard.IsEnabled = false;
 
         }
 
-        private void BuscarCEP(object sender, EventArgs args)
+        public async Task BuscarCEP()
         {
             //TODO - lógica
 
             //TODO - Validações
-            string cep = CEP.Text.Trim();
+            cep = CEP.Text.Trim();
+            
+            Endereco end;
 
+            //await Aviso("Cep consultado antes:" + cep);
             if (isValidCEP(cep))
             {
                 try
                 {
-                    Endereco end = VIACepServico.BuscaEnderecoViaCEP(cep);
+                    //await Aviso("Cep consultado depois:" + cep);
+                   end = await VIACepServico.BuscaEnderecoViaCEPAsync(cep);
+                   Task.Delay(3000).Wait();
+
+
                     if (end != null)
+                    {
                         RESULTADO.Text = string.Format("Endereço: {2} de {3} - {0},{1} ", end.localidade, end.uf, end.logradouro, end.bairro);
+                        btnClipboard.IsEnabled = true;
+                    }
                     else
                     {
-                        DisplayAlert("Erro", "O endereço não foi encontrado para o cep " + cep, "OK");
+                        await DisplayAlert("Erro", "O endereço não foi encontrado para o cep " + cep, "OK");
                         RESULTADO.Text = "";
+                        btnClipboard.IsEnabled = false;
                     }
+                    //actInd.IsVisible = false;
+                    //actInd.IsRunning = false;
+
                 }
                 catch (Exception ex)
                 {
-                    DisplayAlert("Erro Crítico", ex.Message, "OK");
+                    await DisplayAlert("Erro Crítico", ex.Message, "OK");
+                    //await DisplayAlert("Saída ", saida, "OK");
                     RESULTADO.Text = "";
+                    //actInd.IsVisible = false;
+                    //actInd.IsRunning = false;
                 }
             }
             else
             {
-                DisplayAlert("Erro", "CEP Inválido.", "OK");
+                await DisplayAlert("Erro", "CEP Inválido.", "OK");
             }
         }
 
@@ -77,11 +127,20 @@ namespace ConsultarCEP
                 return true;
         }
 
-        private void VerificarDigito(object sender, EventArgs args)
+        private async 
+        Task
+Aviso(string txt)
+        {
+            await DisplayAlert("Aviso", txt, "OK");
+        }
+
+        private async void VerificarDigito(object sender, EventArgs args)
         {
             if (CEP.Text.Length == 8)
             {
-                BuscarCEP(sender, args);
+                //actInd.IsVisible = true;
+                //actInd.IsRunning = true;
+                //BuscarCEP(sender, args);
             }
         }
     }
